@@ -1,0 +1,39 @@
+---
+// src/components/Menu.astro
+---
+
+<nav class="nav-menu">
+    <a href="/">Inicio</a>
+    <a href="/index2">Index 2</a>
+    <a href="/ssr">SSR</a>
+    <a href="/ssg">SSG</a>
+    <a href="/csr">CSR</a>
+    <a href="/estilos">ESTILOS</a>
+    <a href="/vanilla">VANILLA</a>
+    <a href="/react">REACT</a>
+    <a href="/blog">BLOG</a>
+</nav>
+
+<style>
+    .nav-menu {
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+        background: #1e293b;
+        padding: 0.8rem 1.2rem;
+        border-radius: 8px;
+        border: 1px solid #334155;
+    }
+
+    .nav-menu a {
+        color: #94a3b8;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: color 0.2s ease;
+    }
+
+    .nav-menu a:hover {
+        color: #38bdf8;
+    }
+</style>

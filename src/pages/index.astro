@@ -1,0 +1,23 @@
+---
+import Baselayout from "../layouts/Baselayout.astro";
+import Button from "../components/Button.astro";
+import Card from "../components/Card.astro";
+
+const nombre = "David";
+---
+
+<Baselayout>
+    <h1>Mi primera página de Astro</h1>
+    <p class="subtitle">Yo me llamo pereira <span>{nombre}</span></p>
+    <Button href="/index2" texto="tocame" />
+</Baselayout>
+
+<!-- La Card colocada de forma independiente fuera del contenedor -->
+<Card 
+    titulo="Perfil de Pereira" 
+    imagen="https://api.setupsgamers.com/images/streamers/Pereira.jpeg"
+>
+    <p>castor</p>
+    <p>paletas</p>
+    <p>calvo</p>
+</Card>

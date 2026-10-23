@@ -1,0 +1,25 @@
+---
+import Baselayout from "../layouts/Baselayout.astro";
+---
+
+<Baselayout>
+    <h1>Lista de productos usando CSR</h1>
+    <p>fecha y hora <span id="fechahora"></span></p>
+    <ul id="lista"></ul>
+</Baselayout>
+<script>
+    function cargarDatos() {
+        const productos = ["falda", "pantalon", "calcetines"];
+        const lista = document.getElementById("lista");
+        productos.forEach((p) => {
+            const li = document.createElement("li");
+            lista?.appendChild(li);
+            li.textContent = p;
+        });
+        const fechahora = document.getElementById("fechahora");
+        if (fechahora) {
+            fechahora.textContent = new Date().toLocaleString("es-ES");
+        }
+    }
+    cargarDatos()
+</script>
