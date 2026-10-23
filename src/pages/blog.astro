@@ -1,16 +1,18 @@
 ---
 import { getCollection } from "astro:content";
-import Baselayout from "../layouts/Baselayout.astro";
+import BaseLayout from "../layouts/Baselayout.astro";
 
-// Usa 'posts' en plural para coincidir con tu config.ts y la carpeta
-const posts = await getCollection('posts'); 
+// SSG static site generating
+const posts = await getCollection("posts");
 ---
 
-<Baselayout>
+<BaseLayout>
     <h1>Lista de todos los posts</h1>
     <ul>
         {posts.map((post) => (
-            <li>{post.data.titulo}</li>
+            <li>
+                <a href={`/blog/'post.id}`}>{post.data.titulo}</a>
+            </li>
         ))}
     </ul>
-</Baselayout>
+</BaseLayout>
