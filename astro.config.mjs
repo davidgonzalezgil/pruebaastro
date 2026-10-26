@@ -7,6 +7,8 @@ import react from '@astrojs/react';
 
 import mdx from '@astrojs/mdx';
 
+import vercel from '@astrojs/vercel';
+
 // https://astro.build/config
 export default defineConfig({
   server: {
@@ -18,5 +20,6 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [react(), mdx()]
+  integrations: [react(), mdx()],
+  adapter: vercel()
 });
