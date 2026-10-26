@@ -32,18 +32,44 @@ import Menu from "../components/Menu.astro";
 
     body {
         font-family: system-ui, -apple-system, sans-serif;
-        background-color: #0f172a;
-        color: #f8fafc;
+        background-color: #0a0f1d; /* Fondo azul noche muy oscuro */
+        color: #e2e8f0; /* Texto azul/blanco muy claro */
         padding: 2rem 1rem;
     }
 
     header {
-        max-width: 600px;
+        max-width: 710px;
         margin: 0 auto 1.5rem auto;
     }
 
     .container {
-        max-width: 600px;
+        max-width: 900px;
         margin: 0 auto;
+    }
+
+    /* --- CAMBIO DE MARCOS / CUADROS DE NAVEGACIÓN Y CONTENIDO --- */
+    header, 
+    .container > * {
+        background-color: #1e293b; /* Azul marino/pizarra para el fondo del cuadro */
+        border: 1px solid #334155; /* Borde azul grisáceo tenue */
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Sombra elegante para dar profundidad */
+    }
+
+    /* Enlaces generales */
+    a {
+        color: #38bdf8; /* Azul cian eléctrico */
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    a:hover {
+        color: #7dd3fc;
+        text-decoration: underline;
+    }
+
+    ::selection {
+        background-color: #0284c7;
+        color: #ffffff;
     }
 </style>
