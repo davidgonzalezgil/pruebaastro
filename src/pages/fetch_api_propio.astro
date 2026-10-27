@@ -1,4 +1,6 @@
 ---
+export const prerender = false; // Indica a Vercel que renderice la página en vivo en cada visita
+
 import Baselayout from "../layouts/Baselayout.astro";
 import { obtenerHoraData } from "./api/hora";
 
@@ -6,8 +8,6 @@ const datos = obtenerHoraData();
 ---
 
 <Baselayout>
-
     <h1>Hora obtenida usando un api propia</h1>
     <p>La fecha es: {datos.laFecha}</p>
-
 </Baselayout>
