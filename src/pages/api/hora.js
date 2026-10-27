@@ -1,6 +1,8 @@
 export function obtenerHoraData() {
   return {
-    laFecha: new Date().toLocaleString("es-ES")
+    laFecha: new Date().toLocaleString("es-ES", {
+      timeZone: "Europe/Madrid"
+    })
   };
 }
 
