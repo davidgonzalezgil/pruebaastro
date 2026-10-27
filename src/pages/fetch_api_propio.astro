@@ -1,8 +1,8 @@
 ---
 import Baselayout from "../layouts/Baselayout.astro";
 
-const res = await fetch(new URL("/api/hora", Astro.url))
-const datos = await res.json()
+const res = await fetch(`${Astro.url.origin}/api/hora`);
+const datos = await res.json();
 ---
 
 <Baselayout>
