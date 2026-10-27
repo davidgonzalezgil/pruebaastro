@@ -1,0 +1,45 @@
+---
+interface Props {
+  nombre: string;
+  imagen: string;
+}
+
+const { nombre, imagen } = Astro.props;
+---
+
+<div class="tarjeta">
+  <div class="marco">
+    <img src={imagen} alt={nombre} />
+  </div>
+  <p class="nombre">{nombre}</p>
+</div>
+
+<style>
+  .tarjeta {
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    background-color: #f9f9f9;
+    max-width: 200px;
+  }
+
+  .marco {
+    border: 3px solid #333;
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: #fff;
+  }
+
+  .marco img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .nombre {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333;
+  }
+</style>

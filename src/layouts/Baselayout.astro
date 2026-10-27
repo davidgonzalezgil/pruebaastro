@@ -38,8 +38,9 @@ import Menu from "../components/Menu.astro";
     }
 
     header {
-        max-width: 710px;
-        margin: 0 auto 1.5rem auto;
+        width: fit-content; /* El fondo azul se alarga justo al tamaño de los botones */
+        max-width: 100%; /* No se sale del ancho de la pantalla */
+        margin: 0 auto 1.5rem auto; /* Lo centra perfectamente en la pantalla */
     }
 
     .container {

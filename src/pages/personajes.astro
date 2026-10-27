@@ -1,0 +1,35 @@
+---
+import Baselayout from "../layouts/Baselayout.astro";
+import TarjetaPersonaje from "../components/tarjetaPersonaje.astro";
+
+const res = await fetch("https://rickandmortyapi.com/api/character");
+
+if (!res.ok) {
+    throw new Error("fallo al conectarse: " + res.status);
+}
+
+const datos = await res.json();
+const personajes = datos.results;
+---
+
+<Baselayout>
+
+    <h1>Personajes R y M</h1>
+    <div class="contenedor-tarjetas">
+        {personajes.map((personaje: any) => (
+            <TarjetaPersonaje 
+                nombre={personaje.name} 
+                imagen={personaje.image} 
+            />
+        ))}
+    </div>
+
+</Baselayout>
+
+<style>
+  .contenedor-tarjetas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+</style>
