@@ -23,7 +23,8 @@ const proyectos = defineCollection({
         titulo: z.string(),
         autor: z.string().optional(),
         fecha: z.string().optional(),
-        tags: z.array(z.string()).optional()
+        tags: z.array(z.string()).optional(),
+        imagen: z.string().optional()
     })
 });
 
