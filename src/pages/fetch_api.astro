@@ -1,0 +1,23 @@
+---
+export const rerender = false
+
+import Baselayout from "../layouts/Baselayout.astro";
+
+const res = await fetch("https://api.coinpaprika.com/v1/tickers/btc-bitcoin")
+
+if (!res.ok) {
+    throw new Error("fallo al conectarse al api:"+res.status)
+}
+
+const datos = await res.json()
+const precioBitCoin = datos.quotes.USD.price
+const precioBitCoinFormateado = precioBitCoin.toFixed(2)
+---
+
+<Baselayout>
+
+    <h1>El precio del BitCoin</h1>
+    <p>1 BTC = {precioBitCoinFormateado}</p>
+    
+
+</Baselayout>

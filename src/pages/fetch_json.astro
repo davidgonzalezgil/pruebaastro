@@ -1,0 +1,18 @@
+---
+import Baselayout from "../layouts/Baselayout.astro";
+import tecnologias from "../content/tecnologias.json";
+---
+
+<Baselayout>
+
+    <h1>Listado de tecnologias que domino</h1>
+    <ul>
+        {tecnologias.map( tecnologia => (
+            <li>
+                {tecnologia.nombre}
+                <em>{tecnologia.nivel}</em>
+            </li>
+        ))}
+    </ul>
+
+</Baselayout>

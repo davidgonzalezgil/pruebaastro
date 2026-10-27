@@ -21,5 +21,7 @@ export default defineConfig({
   },
 
   integrations: [react(), mdx()],
-  adapter: vercel()
+  adapter: vercel(),
+  output: "static"
+
 });
