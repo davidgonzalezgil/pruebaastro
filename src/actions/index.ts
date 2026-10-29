@@ -4,7 +4,7 @@ import { z } from "astro:schema";
 export const server = {
     newsletter: defineAction({
         input: z.object({
-            email: z.string().email(),
+            email: z.string(),
         }),
         handler: async (input, context) => {
             console.log("email guardado correctamente");

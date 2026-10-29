@@ -10,20 +10,16 @@ import Baselayout from "../layouts/Baselayout.astro";
 </Baselayout>
 
 <script>
-    import { actions } from "astro:actions"
+    import { actions } from "astro:actions";
+    const form = document.querySelector("#newsletter");
+    form?.addEventListener("submit", guardarEmail);
 
-    const form = document.querySelector("#newsletter") as HTMLFormElement
+    async function guardarEmail(event) {
+        event.preventDefault();
 
-    form?.addEventListener("submit", guardarEmail)
+        const form = event.currentTarget as HTMLFormElement;
+        const { data, error } = await actions.newsletter({ email: "prueba" });
 
-    async function guardarEmail(event: SubmitEvent) {
-        event.preventDefault()
-
-        const formData = new FormData(event.currentTarget as HTMLFormElement)
-        const { data, error } = await actions.newsletter({email: "prueba"})
-
-        if (!error) {
-            form?.reset()
-        }
+        form.reset();
     }
 </script>

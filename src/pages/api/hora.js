@@ -1,3 +1,5 @@
+export const prerender = false;
+
 export function obtenerHoraData() {
   return {
     laFecha: new Date().toLocaleString("es-ES", {
