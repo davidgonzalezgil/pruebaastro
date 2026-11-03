@@ -1,9 +1,42 @@
 ---
 import Baselayout from "../layouts/Baselayout.astro";
+import { getAllProducts } from "../lib/db.js";
+export const prerender = false
+
+let productos = []
+let error = false
+
+try {
+    productos = await getAllProducts()
+} catch (error) {
+    console.log("Error al obtener los productos:", error);
+    error = true 
+    Astro.response.status = 503
+}
 ---
 
 <Baselayout>
 
 <h1>Lista de productos guardados en BD</h1>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>PRECIO</th>
+            </tr>
+        </thead>
+        <tbody>
+            {productos.map((producto) => (
+                <tr>
+                    <td>{producto.id}</td>
+                    <td>{producto.nombre}</td>
+                    <td>{producto.precio} €</td>
+                </tr>
+            ))}
+        </tbody>
+    </table>
+</div>
 
 </Baselayout>
