@@ -1,25 +1,44 @@
 import mysql from 'mysql2/promise';
 import { getSecret } from 'astro:env/server';
 
-let pool
+let pool;
 
 function getPool() {
-    pool = mysql.createPool({
-        host: getSecret("MYSQL_HOST"),
-        port: getSecret("MYSQL_PORT"),
-        database: getSecret("MYSQL_DATABASE"),
-        user: getSecret("MYSQL_USER"),
-        password: getSecret("MYSQL_PASSWORD"),
-        charset: 'utf8mb4',
-        connectionLimit: 5,
-        connectTimeout: 5000,
-    })
-    return pool
+    // Si la piscina de conexiones ya existe, la reutilizamos
+    if (!pool) {
+        pool = mysql.createPool({
+            host: getSecret('MYSQL_HOST') || '127.0.0.1',
+            // Convertimos el puerto a Número y usamos 3310 si no se detecta
+            port: Number(getSecret('MYSQL_PORT')) || 3310, 
+            database: getSecret('MYSQL_DATABASE'),
+            user: getSecret('MYSQL_USER'),
+            password: getSecret('MYSQL_PASSWORD'),
+            charset: "utf8mb4",
+            connectionLimit: 5,
+            connectTimeout: 5000
+        });
+    }
+    return pool;
 }
 
+// Obtener productos
 export async function getAllProducts() {
-    const [productos] = await getPool().query
-        (`SELECT id, nombre, precio FROM productos ORDER BY id`)
-    return productos
+    const [productos] = await getPool().query(
+        'SELECT id, nombre, precio FROM productos ORDER BY id'
+    );
+    return productos;
 }
-  
+
+// Borrar productos por su id
+export async function deleteProduct(id) {
+    await getPool().query(
+        'DELETE FROM productos WHERE id = ?', [id]
+    );
+}
+
+// Añadir un producto con su precio
+export async function addProduct(nombre, precio) {
+    await getPool().query(
+        'INSERT INTO productos(nombre, precio) VALUES (?, ?)', [nombre, precio]
+    );
+}

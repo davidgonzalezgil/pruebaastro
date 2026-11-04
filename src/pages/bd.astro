@@ -8,8 +8,8 @@ let error = false
 
 try {
     productos = await getAllProducts()
-} catch (error) {
-    console.log("Error al obtener los productos:", error);
+} catch (err) {
+    console.log("Error al obtener los productos:", err);
     error = true 
     Astro.response.status = 503
 }
@@ -18,6 +18,16 @@ try {
 <Baselayout>
 
 <h1>Lista de productos guardados en BD</h1>
+
+{error && <p style="color: red;">Ocurrió un error al cargar los productos.</p>}
+
+<!-- Formulario necesario para la función 'añadir' del script -->
+<form class="crear-prod">
+    <input type="text" name="nombre" placeholder="Nombre del producto" required />
+    <input type="number" step="0.01" name="precio" placeholder="Precio" required />
+    <button type="submit">Añadir</button>
+</form>
+
 <div>
     <table>
         <thead>
@@ -25,6 +35,7 @@ try {
                 <th>ID</th>
                 <th>NOMBRE</th>
                 <th>PRECIO</th>
+                <th>ACCIONES</th>
             </tr>
         </thead>
         <tbody>
@@ -33,6 +44,10 @@ try {
                     <td>{producto.id}</td>
                     <td>{producto.nombre}</td>
                     <td>{producto.precio} €</td>
+                    <td>
+                        <!-- Botón necesario para la función 'borrar' del script -->
+                        <button class="boton-borrar" data-id={producto.id}>Borrar</button>
+                    </td>
                 </tr>
             ))}
         </tbody>
@@ -40,3 +55,32 @@ try {
 </div>
 
 </Baselayout>
+
+<script>
+    import { actions } from "astro:actions";
+
+    // Añadir producto con su precio
+    document.addEventListener("submit", añadir)
+    async function añadir(event) {
+        if(!event.target.classList.contains("crear-prod")) return;
+
+        event.preventDefault();
+        
+        const formData = new FormData(event.target);
+        const nombre = String(formData.get("nombre"));
+        const precio = Number(formData.get("precio"));
+        await actions.productAdd({nombre:nombre, precio:precio})
+        window.location.reload();
+    }
+
+    // Borrar producto por id
+    document.addEventListener("click", borrar)
+    async function borrar(event) {
+        const target = event.target.closest(".boton-borrar");
+        if(!target) return;
+
+        const id_borrar = Number(target.dataset.id)
+        await actions.productDelete({id:id_borrar})
+        window.location.reload();
+    }
+</script>
